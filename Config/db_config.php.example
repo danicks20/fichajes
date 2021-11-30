@@ -1,0 +1,10 @@
+<?
+    // Config db
+    $db_cf = (object) array (
+        'host'      => 'localhost',
+        'username'  => '',
+        'pass'      => '',
+        'database'  => 'fichajes'
+    );
+
+?>
