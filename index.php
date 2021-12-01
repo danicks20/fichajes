@@ -21,16 +21,21 @@
         // Constantes
         require("constantes.php");
 
-        require("Models/RegistroHora.php");
+        require(BASEDIR."/Models/RegistroHora.php");
 
         use RegistroHora\RegistroHora;
     ?>
 
+    <ul class="menu" style="background: black;">
+        <li><a href="/fichajes"><i class="far fa-edit"></i> Fichar</a></li>
+        <li><a href="/fichajes/templates/filtrar.php"><i class="fas fa-search"></i> Filtrar</a></li>
+    </ul>
+
     <form action="Php/fichaje_form.php" method="post">
         <div class="grid-container">
-            <div class="grid-x grid-padding-x">
+            <div class="grid-x grid-margin-x grid-padding-x">
                 <div class="cell text-center">
-                    <h1>Software fichajes</h1>
+                    <h1><i class="far fa-edit"></i> Fichajes</h1>
                 </div>
                 <fieldset class="cell text-center callout">
                     <legend><strong>Seleccione la empresa</strong></legend>

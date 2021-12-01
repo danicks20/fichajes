@@ -70,6 +70,22 @@
             }
         }
 
+        // Devolver filtrado de registros
+        public function filtroRegistros($empresa, $f_desde, $f_hasta){
+            $sql = "SELECT * FROM registros  WHERE fecha >= '$f_desde' AND fecha <= '$f_hasta' and empresa = '$empresa'";
+            $res = $this->query($sql);
+            $data = $res->fetch_all(MYSQLI_ASSOC);
+            return $data;
+        }
+
+        // Devolver el tiempo total filtrado
+        public function sumTotalFilter($empresa, $f_desde, $f_hasta){
+            $sql = "SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(`tiempo_total`))) AS timeSum  FROM registros  WHERE fecha >= '$f_desde' AND fecha <= '$f_hasta' and empresa = '$empresa'";
+            $res = $this->query($sql);
+            $data = $res->fetch_array(MYSQLI_ASSOC);
+            return $data['timeSum'];
+        }
+
         // Funcion suma 2 horas
         public function suma2horas($hora1, $hora2){
             list($h, $m, $s) = explode(':', $hora2); //Separo los elementos de la segunda hora

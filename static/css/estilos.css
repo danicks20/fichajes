@@ -1,3 +1,7 @@
+.menu li a {
+    color: white;
+}
+
 .card img {
     object-fit: contain;
     height: 80px;
