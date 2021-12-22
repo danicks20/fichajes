@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Software fichajes</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!-- Compressed CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css" crossorigin="anonymous">
     <link href="/fichajes/static/libs/fontawesome5/css/all.css" rel="stylesheet"> <!--load all styles -->
