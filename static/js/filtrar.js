@@ -22,6 +22,11 @@ $(function() {
         closeButton: true
     });
 
+    var columns_export = [ 
+        'empresa:name', 'fecha:name', 'dia:name',
+        'hora_entrada:name', 'hora_salida:name', 'tiempo_total:name',
+    ]
+
     filterTable = $('#tbFiltros').DataTable({
         language: {
             url: '//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json'
@@ -32,7 +37,47 @@ $(function() {
         pageLength: 100,
         lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todo"]],
         buttons: [
-            'copy', 'excel', 'pdf', 'print'
+            {
+                extend:    'copyHtml5',
+                text:      '<i class="far fa-copy"></i> Copiar',
+                titleAttr: 'Copiar'
+            }, 
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="far fa-file-excel"></i> Excel',
+                titleAttr: 'Excel',
+                exportOptions: {
+                    columns: columns_export
+                }
+            }, 
+            {
+                extend:    'print',
+                text:      '<i class="fas fa-print"></i> Imprimir',
+                titleAttr: 'Imprimir',
+                exportOptions: {
+                    columns: columns_export
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                text: '<i class="far fa-file-pdf"></i> PDF',
+                title: 'Listado fichajes',
+                /* customize: function(doc) {
+                    doc.styles.title = {
+                        color: 'red',
+                        fontSize: '40',
+                        background: 'blue',
+                        alignment: 'center'
+                    }   
+                },  */ 
+                /* messageTop: function(){
+                    return "Listado peritaciones";
+                }, */
+                footer: true,
+                exportOptions: {
+                    columns: columns_export
+                }
+            },
         ],
         ordering: false,
         ajax: {
