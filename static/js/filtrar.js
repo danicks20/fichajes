@@ -50,17 +50,33 @@ $(function() {
             { name: 'hora_salida', data: 'hora_salida', className: "tdLeft" },
             { name: 'tiempo_total', data: 'tiempo_total', className: "tdLeft" },
         ],
+        footerCallback: function (row, data, start, end, display) {
+            var api = this.api(), data;
+
+            // converting to interger to find total
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+
+            // computing column Total of the complete result 
+            var Total = api
+                .column('tiempo_total:name', { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return moment.duration(b).add(a);
+                }, 0);
+            
+            if (Total != 0){
+                // Update footer by showing the total with the reference of the column index 
+                $(api.column('hora_salida:name').footer()).html('Total');
+                $(api.column('tiempo_total:name').footer()).html(moment.utc(Total.asMilliseconds()).format('HH:mm:ss'));
+            }
+            
+        },
     });
-
-    // $("#groupByDays").change(function() {
-    //     if ($(this).is(":checked")) {
-    //         console.log("Check");
-
-    //     } else {
-    //         console.log("No Check");
-    //     }
-    //     filterTable.ajax.reload();
-    // });
 
     // add peritacion
     $("#filtrosForm").submit(function(e) {

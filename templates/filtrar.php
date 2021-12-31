@@ -137,7 +137,7 @@
                             </fieldset>
                         </div>
 
-                        <div class="cell medium-6"" style="display: flex; margin-top: 10px;">
+                        <div class="cell medium-6"" style=" display: flex; margin-top: 10px;">
                             <div>Agrupar por días</div>
                             <div class="switch tiny" style="margin-left: 10px;">
                                 <input class="switch-input" id="groupByDays" name="groupByDays" type="checkbox">
@@ -176,6 +176,16 @@
                     </thead>
                     <tbody>
                     </tbody>
+                    <tfoot align="right">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -187,6 +197,8 @@
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/js/foundation.min.js" crossorigin="anonymous"></script>
     <script src="/fichajes/static/libs/foundation-datepicker/js/foundation-datepicker.js"></script>
     <script src="/fichajes/static/libs/foundation-datepicker/js/locales/foundation-datepicker.es.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/es.min.js"></script>
 
     <!-- Datatables -->
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
