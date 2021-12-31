@@ -121,7 +121,7 @@
                 <i class="far fa-clock"></i>
                 <strong>Tiempo total: </strong><?= (new RegistroHora)->getTotalTime(); ?> horas.
             </div>
-            <div class="cell text-center" style="margin-top: 50px;">
+            <div class="cell text-center">
                 <table class="hover">
                     <thead>
                         <tr>

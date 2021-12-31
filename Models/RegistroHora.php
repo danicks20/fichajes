@@ -71,8 +71,37 @@
         }
 
         // Devolver filtrado de registros
-        public function filtroRegistros($empresa, $f_desde, $f_hasta){
-            $sql = "SELECT * FROM registros  WHERE fecha >= '$f_desde' AND fecha <= '$f_hasta' and empresa = '$empresa'";
+        public function filtroRegistros($form){
+            
+            $empresas = [];
+
+            if (isset($form['groupByDays'])){
+                $sql = "SELECT '' as id, '' as empresa, fecha, '' as hora_entrada, '' as hora_salida, 
+                        SEC_TO_TIME(SUM(TIME_TO_SEC(tiempo_total))) AS tiempo_total 
+                        FROM registros WHERE 1=1 ";
+            }else{
+                $sql = "SELECT * FROM registros  WHERE 1=1 ";
+            }
+
+            if (isset($form['fecha_desde'])) $sql .= "AND fecha >= '{$form['fecha_desde']}' ";
+            if (isset($form['fecha_hasta'])) $sql .= "AND fecha <= '{$form['fecha_hasta']}' ";
+
+            if (isset($form['kike'])) $empresas[] = 'Kike';
+            if (isset($form['edu'])) $empresas[] = 'Edu';
+            if (isset($form['emilio'])) $empresas[] = 'Emilio';
+
+            if (count($empresas) > 0){
+                $str_empresas = implode ("','", $empresas);
+                $filter_empresas = "('$str_empresas')";
+                $sql .= "AND empresa in " . $filter_empresas; 
+            }
+
+            if (isset($form['groupByDays'])){
+                $sql .= " GROUP BY fecha";
+            }
+
+            $sql .= " ORDER BY fecha";
+
             $res = $this->query($sql);
             $data = $res->fetch_all(MYSQLI_ASSOC);
             return $data;

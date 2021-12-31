@@ -4,18 +4,10 @@
     require_once(BASEDIR."/Models/RegistroHora.php");
     use RegistroHora\RegistroHora;
     
-    if (isset($_POST["filtrar"])){
 
-        $empresa = $_POST["empresa"];
-        $f_desde = $_POST["fecha_desde"];
-        $f_hasta = $_POST["fecha_hasta"];
-
-        $registros = (new RegistroHora)->filtroRegistros($empresa, $f_desde, $f_hasta);
-        $_SESSION['filtro_empresa'] = $empresa;
-        $_SESSION['filtro_desde'] = $f_desde;
-        $_SESSION['filtro_hasta'] = $f_hasta;
-        $_SESSION['registros_filtrados'] = $registros;
-        header("Location: ".BASEURL."/templates/filtrar.php");
-        die();
-    } 
+    if (!isset($_POST['filtros'])) die(json_encode(["data" => []]));
+    $filtros = [];
+    parse_str($_POST['filtros'], $filtros);
+    $registros = (new RegistroHora)->filtroRegistros($filtros);
+    echo json_encode(["data" => $registros]);
 ?>
