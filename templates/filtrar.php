@@ -169,6 +169,7 @@
                             <th>Id</th>
                             <th>Empresa</th>
                             <th>Fecha</th>
+                            <th>Día</th>
                             <th>Entrada</th>
                             <th>Salida</th>
                             <th>Tiempo total</th>
@@ -178,6 +179,7 @@
                     </tbody>
                     <tfoot align="right">
                         <tr>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>

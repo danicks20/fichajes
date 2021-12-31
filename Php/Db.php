@@ -23,6 +23,9 @@
             if ($this->mysqli->connect_error) {
                 die("Connection failed: " . $this->mysqli->connect_error);
             }
+
+            // Set locale 
+            $this->mysqli->query("SET lc_time_names = 'es_ES'");
         }
 
         public function query($sql) {

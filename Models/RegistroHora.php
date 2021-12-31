@@ -76,11 +76,13 @@
             $empresas = [];
 
             if (isset($form['groupByDays'])){
-                $sql = "SELECT id, empresa, fecha, '' as hora_entrada, '' as hora_salida, 
+                $sql = "SELECT id, empresa, fecha, DAYNAME(fecha) as dia, '' as hora_entrada, '' as hora_salida, 
                         SEC_TO_TIME(SUM(TIME_TO_SEC(tiempo_total))) AS tiempo_total 
                         FROM registros WHERE 1=1 ";
             }else{
-                $sql = "SELECT * FROM registros  WHERE 1=1 ";
+                $sql = "SELECT id, empresa, fecha, DAYNAME(fecha) as dia, hora_entrada, 
+                        hora_salida, tiempo_total 
+                        FROM registros  WHERE 1=1 ";
             }
 
             if (isset($form['fecha_desde'])) $sql .= "AND fecha >= '{$form['fecha_desde']}' ";

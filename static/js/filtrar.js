@@ -46,6 +46,7 @@ $(function() {
             { name: 'id', data: 'id', className: "tdRight", visible: false },
             { name: 'empresa', data: 'empresa', className: "tdLeft" },
             { name: 'fecha', data: 'fecha', className: "tdLeft" },
+            { name: 'dia', data: 'dia', className: "tdLeft" },
             { name: 'hora_entrada', data: 'hora_entrada', className: "tdLeft" },
             { name: 'hora_salida', data: 'hora_salida', className: "tdLeft" },
             { name: 'tiempo_total', data: 'tiempo_total', className: "tdLeft" },
