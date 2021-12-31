@@ -51,21 +51,28 @@ $(function() {
             { name: 'tiempo_total', data: 'tiempo_total', className: "tdLeft" },
         ],
         footerCallback: function (row, data, start, end, display) {
-            var api = this.api(), data;
+            var api = this.api();
 
             // converting milliseconds to hours, minutes, seconds...
-            var msToTime = function (duration) {
-                var milliseconds = Math.floor((duration % 1000) / 100),
-                    seconds = Math.floor((duration / 1000) % 60),
-                    minutes = Math.floor((duration / (1000 * 60)) % 60),
-                    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-                hours = (hours < 10) ? "0" + hours : hours;
-                minutes = (minutes < 10) ? "0" + minutes : minutes;
-                seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-                return hours + ":" + minutes + ":" + seconds;
-            };
+            function parseMillisecondsIntoReadableTime(milliseconds){
+                //Get hours from milliseconds
+                var hours = milliseconds / (1000*60*60);
+                var absoluteHours = Math.floor(hours);
+                var h = absoluteHours > 9 ? absoluteHours : '0' + absoluteHours;
+              
+                //Get remainder from hours and convert to minutes
+                var minutes = (hours - absoluteHours) * 60;
+                var absoluteMinutes = Math.floor(minutes);
+                var m = absoluteMinutes > 9 ? absoluteMinutes : '0' +  absoluteMinutes;
+              
+                //Get remainder from minutes and convert to seconds
+                var seconds = (minutes - absoluteMinutes) * 60;
+                var absoluteSeconds = Math.floor(seconds);
+                var s = absoluteSeconds > 9 ? absoluteSeconds : '0' + absoluteSeconds;
+              
+              
+                return h + ':' + m + ':' + s;
+              }
 
             // computing column Total of the complete result 
             var Total = api
@@ -76,9 +83,11 @@ $(function() {
                 }, 0);
             
             if (Total != 0){
+                var milliseconds = Total.asMilliseconds();
+        
                 // Update footer by showing the total with the reference of the column index 
                 $(api.column('hora_salida:name').footer()).html('Total');
-                $(api.column('tiempo_total:name').footer()).html(msToTime(moment.utc(Total.asMilliseconds())));
+                $(api.column('tiempo_total:name').footer()).html(parseMillisecondsIntoReadableTime(milliseconds));
             }
             
         },

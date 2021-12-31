@@ -138,7 +138,7 @@
                         </div>
 
                         <div class="cell medium-6"" style=" display: flex; margin-top: 10px;">
-                            <div>Agrupar por días</div>
+                            <div>Agrupar por días y empresa</div>
                             <div class="switch tiny" style="margin-left: 10px;">
                                 <input class="switch-input" id="groupByDays" name="groupByDays" type="checkbox">
                                 <label class="switch-paddle" for="groupByDays">

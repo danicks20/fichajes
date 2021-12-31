@@ -76,8 +76,7 @@
             $empresas = [];
 
             if (isset($form['groupByDays'])){
-                $sql = "SELECT '' as id, GROUP_CONCAT(DISTINCT empresa ORDER BY empresa) AS empresa, 
-                        fecha, '' as hora_entrada, '' as hora_salida, 
+                $sql = "SELECT id, empresa, fecha, '' as hora_entrada, '' as hora_salida, 
                         SEC_TO_TIME(SUM(TIME_TO_SEC(tiempo_total))) AS tiempo_total 
                         FROM registros WHERE 1=1 ";
             }else{
@@ -98,7 +97,7 @@
             }
 
             if (isset($form['groupByDays'])){
-                $sql .= " GROUP BY fecha";
+                $sql .= " GROUP BY fecha, empresa";
             }
 
             $sql .= " ORDER BY fecha";
