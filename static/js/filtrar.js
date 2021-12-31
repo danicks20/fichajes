@@ -53,12 +53,18 @@ $(function() {
         footerCallback: function (row, data, start, end, display) {
             var api = this.api(), data;
 
-            // converting to interger to find total
-            var intVal = function (i) {
-                return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '') * 1 :
-                    typeof i === 'number' ?
-                        i : 0;
+            // converting milliseconds to hours, minutes, seconds...
+            var msToTime = function (duration) {
+                var milliseconds = Math.floor((duration % 1000) / 100),
+                    seconds = Math.floor((duration / 1000) % 60),
+                    minutes = Math.floor((duration / (1000 * 60)) % 60),
+                    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+                hours = (hours < 10) ? "0" + hours : hours;
+                minutes = (minutes < 10) ? "0" + minutes : minutes;
+                seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+                return hours + ":" + minutes + ":" + seconds;
             };
 
             // computing column Total of the complete result 
@@ -72,7 +78,7 @@ $(function() {
             if (Total != 0){
                 // Update footer by showing the total with the reference of the column index 
                 $(api.column('hora_salida:name').footer()).html('Total');
-                $(api.column('tiempo_total:name').footer()).html(moment.utc(Total.asMilliseconds()).format('HH:mm:ss'));
+                $(api.column('tiempo_total:name').footer()).html(msToTime(moment.utc(Total.asMilliseconds())));
             }
             
         },
