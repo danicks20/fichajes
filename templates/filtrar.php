@@ -169,10 +169,10 @@
                             <th>Id</th>
                             <th>Empresa</th>
                             <th>Fecha</th>
-                            <th>Día</th>
                             <th>Entrada</th>
                             <th>Salida</th>
                             <th>Tiempo total</th>
+                            <th>Día</th>
                         </tr>
                     </thead>
                     <tbody>
